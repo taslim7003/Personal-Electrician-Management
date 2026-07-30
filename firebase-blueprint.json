@@ -1,0 +1,205 @@
+{
+  "entities": {
+    "project": {
+      "title": "Project",
+      "description": "Stores details of all electrician projects",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "customerName": { "type": "string" },
+        "customerPhone": { "type": "string" },
+        "customerAddress": { "type": "string" },
+        "workLocation": { "type": "string" },
+        "category": { "type": "string", "enum": ["residential", "commercial", "industrial", "office", "factory"] },
+        "contractAmount": { "type": "number" },
+        "advanceReceived": { "type": "number" },
+        "status": { "type": "string", "enum": ["running", "completed", "paused", "cancelled"] },
+        "priority": { "type": "string", "enum": ["low", "medium", "high"] },
+        "startDate": { "type": "string" },
+        "expectedCompletionDate": { "type": "string" },
+        "actualCompletionDate": { "type": "string" },
+        "notes": { "type": "string" },
+        "mediaUrls": { "type": "array" },
+        "ownerId": { "type": "string" },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["id", "name", "customerName", "category", "contractAmount", "advanceReceived", "status", "priority", "startDate", "expectedCompletionDate", "ownerId"]
+    },
+    "customer": {
+      "title": "Customer",
+      "description": "Stores customer details",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "phone": { "type": "string" },
+        "address": { "type": "string" },
+        "notes": { "type": "string" },
+        "ownerId": { "type": "string" }
+      },
+      "required": ["id", "name", "ownerId"]
+    },
+    "employee": {
+      "title": "Employee",
+      "description": "Stores details of employees/labourers",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "phone": { "type": "string" },
+        "dailyWage": { "type": "number" },
+        "role": { "type": "string" },
+        "status": { "type": "string", "enum": ["active", "inactive"] },
+        "ownerId": { "type": "string" }
+      },
+      "required": ["id", "name", "dailyWage", "status", "ownerId"]
+    },
+    "attendance": {
+      "title": "Attendance",
+      "description": "Daily employee attendance and wage logs",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "employeeId": { "type": "string" },
+        "date": { "type": "string" },
+        "status": { "type": "string", "enum": ["present", "absent", "half_day"] },
+        "workingHours": { "type": "number" },
+        "overtimeHours": { "type": "number" },
+        "advancePaid": { "type": "number" },
+        "projectId": { "type": "string" },
+        "ownerId": { "type": "string" }
+      },
+      "required": ["id", "employeeId", "date", "status", "workingHours", "ownerId"]
+    },
+    "dailyLog": {
+      "title": "DailyLog",
+      "description": "Records of daily electrical work on site",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "projectId": { "type": "string" },
+        "date": { "type": "string" },
+        "description": { "type": "string" },
+        "startTime": { "type": "string" },
+        "endTime": { "type": "string" },
+        "totalHours": { "type": "number" },
+        "weather": { "type": "string" },
+        "remarks": { "type": "string" },
+        "mediaUrls": { "type": "array" },
+        "ownerId": { "type": "string" }
+      },
+      "required": ["id", "projectId", "date", "description", "totalHours", "ownerId"]
+    },
+    "material": {
+      "title": "Material",
+      "description": "Purchased material items",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "brand": { "type": "string" },
+        "category": { "type": "string", "enum": ["wire", "mcb", "switch", "socket", "conduit_pipe", "pvc_pipe", "panel", "lights", "fan", "tools", "safety_equipment", "others"] },
+        "quantity": { "type": "number" },
+        "unit": { "type": "string" },
+        "rate": { "type": "number" },
+        "gst": { "type": "number" },
+        "totalCost": { "type": "number" },
+        "supplier": { "type": "string" },
+        "purchaseDate": { "type": "string" },
+        "billUrl": { "type": "string" },
+        "projectId": { "type": "string" },
+        "ownerId": { "type": "string" }
+      },
+      "required": ["id", "name", "category", "quantity", "unit", "rate", "totalCost", "purchaseDate", "projectId", "ownerId"]
+    },
+    "expense": {
+      "title": "Expense",
+      "description": "Daily expense transactions",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "amount": { "type": "number" },
+        "category": { "type": "string", "enum": ["transport", "petrol", "food", "tea", "hotel", "vehicle_repair", "material_purchase", "labour", "equipment", "tool_purchase", "miscellaneous"] },
+        "date": { "type": "string" },
+        "description": { "type": "string" },
+        "projectId": { "type": "string" },
+        "billUrl": { "type": "string" },
+        "ownerId": { "type": "string" }
+      },
+      "required": ["id", "amount", "category", "date", "description", "ownerId"]
+    },
+    "payment": {
+      "title": "Payment",
+      "description": "Payments received from customers",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "projectId": { "type": "string" },
+        "date": { "type": "string" },
+        "amount": { "type": "number" },
+        "paymentMethod": { "type": "string", "enum": ["cash", "upi", "bank", "cheque"] },
+        "transactionId": { "type": "string" },
+        "screenshotUrl": { "type": "string" },
+        "ownerId": { "type": "string" }
+      },
+      "required": ["id", "projectId", "date", "amount", "paymentMethod", "ownerId"]
+    },
+    "setting": {
+      "title": "Setting",
+      "description": "Personal business and app settings",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "businessName": { "type": "string" },
+        "businessLogo": { "type": "string" },
+        "phone": { "type": "string" },
+        "email": { "type": "string" },
+        "address": { "type": "string" },
+        "currency": { "type": "string" },
+        "theme": { "type": "string", "enum": ["light", "dark"] },
+        "ownerId": { "type": "string" }
+      },
+      "required": ["id", "businessName", "currency", "theme", "ownerId"]
+    }
+  },
+  "firestore": {
+    "/projects/{projectId}": {
+      "schema": "project",
+      "description": "Electrical projects collection"
+    },
+    "/customers/{customerId}": {
+      "schema": "customer",
+      "description": "Business customers details"
+    },
+    "/employees/{employeeId}": {
+      "schema": "employee",
+      "description": "Employee directory"
+    },
+    "/attendance/{attendanceId}": {
+      "schema": "attendance",
+      "description": "Daily employee attendance tracker logs"
+    },
+    "/dailyLogs/{logId}": {
+      "schema": "dailyLog",
+      "description": "Electrical daily work notes and descriptions"
+    },
+    "/materials/{materialId}": {
+      "schema": "material",
+      "description": "Purchased materials ledger"
+    },
+    "/expenses/{expenseId}": {
+      "schema": "expense",
+      "description": "General and project business expenses logs"
+    },
+    "/payments/{paymentId}": {
+      "schema": "payment",
+      "description": "Customer project payments received logs"
+    },
+    "/settings/{settingId}": {
+      "schema": "setting",
+      "description": "Owner personal settings"
+    }
+  }
+}

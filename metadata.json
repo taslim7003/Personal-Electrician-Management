@@ -1,0 +1,6 @@
+{
+  "name": "Personal Electrician Management",
+  "description": "Personal business management system for an electrician contracting business to manage projects, daily work logs, material purchases, and track expenses, payments and net profit.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

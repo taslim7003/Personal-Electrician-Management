@@ -1,0 +1,108 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // Global helper: check if user is logged in
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+    
+    // Check if user is the owner of existing document
+    function isOwner(resource) {
+      return resource.data.ownerId == request.auth.uid;
+    }
+
+    // Check if user is assigning themselves as owner of the new document
+    function incomingIsOwner() {
+      return request.resource.data.ownerId == request.auth.uid;
+    }
+
+    // Generic validation helper for IDs
+    function isValidId(id) {
+      return id is string && id.size() > 0 && id.size() <= 128;
+    }
+
+    // Validation for Project
+    function isValidProject() {
+      return request.resource.data.name is string && request.resource.data.name.size() > 0
+          && request.resource.data.category in ['residential', 'commercial', 'industrial', 'office', 'factory']
+          && request.resource.data.contractAmount is number
+          && request.resource.data.advanceReceived is number
+          && request.resource.data.status in ['running', 'completed', 'paused', 'cancelled']
+          && request.resource.data.priority in ['low', 'medium', 'high']
+          && request.resource.data.startDate is string;
+    }
+
+    // Projects Collection rules
+    match /projects/{projectId} {
+      allow read: if isAuthenticated() && isOwner(resource);
+      allow create: if isAuthenticated() && incomingIsOwner() && isValidId(projectId) && isValidProject();
+      allow update: if isAuthenticated() && isOwner(resource) && incomingIsOwner() && isValidProject();
+      allow delete: if isAuthenticated() && isOwner(resource);
+    }
+
+    // Customers Collection rules
+    match /customers/{customerId} {
+      allow read: if isAuthenticated() && isOwner(resource);
+      allow create: if isAuthenticated() && incomingIsOwner() && isValidId(customerId);
+      allow update: if isAuthenticated() && isOwner(resource) && incomingIsOwner();
+      allow delete: if isAuthenticated() && isOwner(resource);
+    }
+
+    // Employees Collection rules
+    match /employees/{employeeId} {
+      allow read: if isAuthenticated() && isOwner(resource);
+      allow create: if isAuthenticated() && incomingIsOwner() && isValidId(employeeId);
+      allow update: if isAuthenticated() && isOwner(resource) && incomingIsOwner();
+      allow delete: if isAuthenticated() && isOwner(resource);
+    }
+
+    // Attendance Collection rules
+    match /attendance/{attendanceId} {
+      allow read: if isAuthenticated() && isOwner(resource);
+      allow create: if isAuthenticated() && incomingIsOwner() && isValidId(attendanceId);
+      allow update: if isAuthenticated() && isOwner(resource) && incomingIsOwner();
+      allow delete: if isAuthenticated() && isOwner(resource);
+    }
+
+    // DailyLogs Collection rules
+    match /dailyLogs/{logId} {
+      allow read: if isAuthenticated() && isOwner(resource);
+      allow create: if isAuthenticated() && incomingIsOwner() && isValidId(logId);
+      allow update: if isAuthenticated() && isOwner(resource) && incomingIsOwner();
+      allow delete: if isAuthenticated() && isOwner(resource);
+    }
+
+    // Materials Collection rules
+    match /materials/{materialId} {
+      allow read: if isAuthenticated() && isOwner(resource);
+      allow create: if isAuthenticated() && incomingIsOwner() && isValidId(materialId);
+      allow update: if isAuthenticated() && isOwner(resource) && incomingIsOwner();
+      allow delete: if isAuthenticated() && isOwner(resource);
+    }
+
+    // Expenses Collection rules
+    match /expenses/{expenseId} {
+      allow read: if isAuthenticated() && isOwner(resource);
+      allow create: if isAuthenticated() && incomingIsOwner() && isValidId(expenseId);
+      allow update: if isAuthenticated() && isOwner(resource) && incomingIsOwner();
+      allow delete: if isAuthenticated() && isOwner(resource);
+    }
+
+    // Payments Collection rules
+    match /payments/{paymentId} {
+      allow read: if isAuthenticated() && isOwner(resource);
+      allow create: if isAuthenticated() && incomingIsOwner() && isValidId(paymentId);
+      allow update: if isAuthenticated() && isOwner(resource) && incomingIsOwner();
+      allow delete: if isAuthenticated() && isOwner(resource);
+    }
+
+    // Settings Collection rules
+    match /settings/{settingId} {
+      allow read: if isAuthenticated() && isOwner(resource);
+      allow create: if isAuthenticated() && incomingIsOwner() && isValidId(settingId);
+      allow update: if isAuthenticated() && isOwner(resource) && incomingIsOwner();
+      allow delete: if isAuthenticated() && isOwner(resource);
+    }
+  }
+}
