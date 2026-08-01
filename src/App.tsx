@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 
-// 🔴 FIX: All imports changed from './' to '../' 
-// targetting src/ folder components, pages, and contexts
 import { AuthProvider, useAuth } from './contexts/AuthContext';
 import { DbProvider, useDb } from './contexts/DbContext';
 import { Sidebar } from './components/Sidebar';
