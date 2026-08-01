@@ -1,20 +1,23 @@
 import React, { useState } from 'react';
-import { AuthProvider, useAuth } from './contexts/AuthContext';
-import { DbProvider, useDb } from './contexts/DbContext';
-import { Sidebar } from './components/Sidebar';
-import { Header } from './components/Header';
-import { Login } from './pages/Login';
-import { Dashboard } from './pages/Dashboard';
-import { Projects } from './pages/Projects';
-import { DailyLogs } from './pages/DailyLogs';
-import { Employees } from './pages/Employees';
-import { ExpensesMaterials } from './pages/ExpensesMaterials';
-import { Payments } from './pages/Payments';
-import { ProfitCalculator } from './pages/ProfitCalculator';
-import { Reports } from './pages/Reports';
-import { CalendarView } from './pages/CalendarView';
-import { Settings } from './pages/Settings';
-import { BeforeAfterPhotos } from './pages/BeforeAfterPhotos';
+
+// 🔴 FIX: All imports changed from './' to '../' 
+// targetting src/ folder components, pages, and contexts
+import { AuthProvider, useAuth } from '../contexts/AuthContext';
+import { DbProvider, useDb } from '../contexts/DbContext';
+import { Sidebar } from '../components/Sidebar';
+import { Header } from '../components/Header';
+import { Login } from '../pages/Login';
+import { Dashboard } from '../pages/Dashboard';
+import { Projects } from '../pages/Projects';
+import { DailyLogs } from '../pages/DailyLogs';
+import { Employees } from '../pages/Employees';
+import { ExpensesMaterials } from '../pages/ExpensesMaterials';
+import { Payments } from '../pages/Payments';
+import { ProfitCalculator } from '../pages/ProfitCalculator';
+import { Reports } from '../pages/Reports';
+import { CalendarView } from '../pages/CalendarView';
+import { Settings } from '../pages/Settings';
+import { BeforeAfterPhotos } from '../pages/BeforeAfterPhotos';
 import { Menu, Wrench } from 'lucide-react';
 
 const MainAppContent: React.FC = () => {
