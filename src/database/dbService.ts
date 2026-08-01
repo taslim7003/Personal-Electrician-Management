@@ -20,8 +20,42 @@ import {
   Material, 
   Expense, 
   Payment, 
-  Setting 
+  Setting,
+  BeforeAfterItem
 } from './types';
+
+const DEFAULT_BEFORE_AFTER: BeforeAfterItem[] = [
+  {
+    id: 'ba1',
+    title: 'Main Circuit Breaker Panel Upgrade',
+    projectId: 'p2',
+    customerName: 'Dr. Robert Chen',
+    category: 'panel_upgrade',
+    description: 'Replaced an old rusted fuse box with a neat 200 Amp breaker panel and surge protector.',
+    beforeImageUrl: 'https://images.unsplash.com/photo-1558211583-d26f610c1eb1?auto=format&fit=crop&q=80&w=800',
+    afterImageUrl: 'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&q=80&w=800',
+    beforeLabel: 'Old Fuse Box (Rusted / Unsafe)',
+    afterLabel: '200A Modern Breaker Board',
+    date: '2026-07-12',
+    ownerId: 'demo',
+    createdAt: '2026-07-12T10:00:00Z'
+  },
+  {
+    id: 'ba2',
+    title: 'Recessed LED Ceiling Lighting Fitout',
+    projectId: 'p1',
+    customerName: 'Apex Corp Solutions',
+    category: 'lighting',
+    description: 'Replaced outdated flickering fluorescent tubes with energy-efficient warm recessed LED panels.',
+    beforeImageUrl: 'https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&q=80&w=800',
+    afterImageUrl: 'https://images.unsplash.com/photo-1507089947368-19c1da9775ae?auto=format&fit=crop&q=80&w=800',
+    beforeLabel: 'Old Fluorescent Tubes',
+    afterLabel: 'Modern Recessed LED Lighting',
+    date: '2026-07-20',
+    ownerId: 'demo',
+    createdAt: '2026-07-20T14:30:00Z'
+  }
+];
 
 // Default mock data to populate empty states
 const DEFAULT_CUSTOMERS: Customer[] = [
@@ -368,6 +402,17 @@ export class DbService {
     return this.deleteItem('payments', id);
   }
 
+  // --- BEFORE & AFTER PHOTOS ---
+  async getBeforeAfterItems(): Promise<BeforeAfterItem[]> {
+    return this.getCollection<BeforeAfterItem>('beforeAfterItems', DEFAULT_BEFORE_AFTER);
+  }
+  async saveBeforeAfterItem(item: BeforeAfterItem): Promise<BeforeAfterItem> {
+    return this.saveItem<BeforeAfterItem>('beforeAfterItems', item);
+  }
+  async deleteBeforeAfterItem(id: string): Promise<void> {
+    return this.deleteItem('beforeAfterItems', id);
+  }
+
   // --- SETTINGS ---
   async getSettings(): Promise<Setting> {
     if (this.isCloud()) {
@@ -417,6 +462,7 @@ export class DbService {
       materials: await this.getMaterials(),
       expenses: await this.getExpenses(),
       payments: await this.getPayments(),
+      beforeAfterItems: await this.getBeforeAfterItems(),
       settings: await this.getSettings()
     };
     return JSON.stringify(backup, null, 2);
@@ -497,6 +543,15 @@ export class DbService {
         if (this.isCloud()) {
           for (const item of pays) {
             await this.saveItem('payments', item);
+          }
+        }
+      }
+      if (data.beforeAfterItems) {
+        const items = data.beforeAfterItems.map((b: any) => ({ ...b, ownerId: suffix }));
+        saveLocal(`local_beforeAfterItems_${suffix}`, items);
+        if (this.isCloud()) {
+          for (const item of items) {
+            await this.saveItem('beforeAfterItems', item);
           }
         }
       }

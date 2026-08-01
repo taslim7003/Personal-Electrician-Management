@@ -14,6 +14,7 @@ import { ProfitCalculator } from './pages/ProfitCalculator';
 import { Reports } from './pages/Reports';
 import { CalendarView } from './pages/CalendarView';
 import { Settings } from './pages/Settings';
+import { BeforeAfterPhotos } from './pages/BeforeAfterPhotos';
 import { Menu, Wrench } from 'lucide-react';
 
 const MainAppContent: React.FC = () => {
@@ -42,6 +43,8 @@ const MainAppContent: React.FC = () => {
       setCurrentTab('expenses');
     } else if (actionType === 'payment') {
       setCurrentTab('payments');
+    } else if (actionType === 'before-after') {
+      setCurrentTab('before-after');
     }
   };
 
@@ -52,6 +55,8 @@ const MainAppContent: React.FC = () => {
         return <Dashboard setCurrentTab={setCurrentTab} openQuickAction={handleOpenQuickAction} />;
       case 'projects':
         return <Projects />;
+      case 'before-after':
+        return <BeforeAfterPhotos />;
       case 'logs':
         return <DailyLogs />;
       case 'employees':

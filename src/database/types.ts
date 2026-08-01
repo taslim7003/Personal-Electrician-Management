@@ -119,3 +119,19 @@ export interface Setting {
   theme: 'light' | 'dark';
   ownerId: string;
 }
+
+export interface BeforeAfterItem {
+  id: string;
+  title: string;
+  projectId?: string;
+  customerName?: string;
+  category?: 'panel_upgrade' | 'wiring' | 'lighting' | 'appliance_fix' | 'commercial_fitout' | 'others';
+  description?: string;
+  beforeImageUrl: string;
+  afterImageUrl: string;
+  beforeLabel?: string;
+  afterLabel?: string;
+  date?: string;
+  ownerId: string;
+  createdAt: string;
+}

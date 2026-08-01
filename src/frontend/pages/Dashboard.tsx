@@ -22,7 +22,8 @@ import {
   Flame,
   Calendar,
   Layers,
-  Sparkles
+  Sparkles,
+  Camera
 } from 'lucide-react';
 import { 
   BarChart, 
@@ -184,6 +185,13 @@ export const Dashboard: React.FC<DashboardProps> = ({ setCurrentTab, openQuickAc
           >
             <TrendingUp className="w-3.5 h-3.5 text-emerald-500" />
             Add Payment
+          </button>
+          <button
+            onClick={() => openQuickAction('before-after')}
+            className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-semibold bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 rounded-xl transition-all cursor-pointer border border-slate-200 dark:border-slate-800 shadow-sm"
+          >
+            <Camera className="w-3.5 h-3.5 text-purple-500" />
+            Before & After
           </button>
         </div>
       </div>

@@ -10,7 +10,8 @@ import {
   Material, 
   Expense, 
   Payment, 
-  Setting 
+  Setting,
+  BeforeAfterItem
 } from '../../database/types';
 
 interface DbContextType {
@@ -22,6 +23,7 @@ interface DbContextType {
   materials: Material[];
   expenses: Expense[];
   payments: Payment[];
+  beforeAfterItems: BeforeAfterItem[];
   settings: Setting | null;
   dbLoading: boolean;
   refreshData: () => Promise<void>;
@@ -57,6 +59,10 @@ interface DbContextType {
   // Payments CRUD
   savePayment: (payment: Payment) => Promise<void>;
   deletePayment: (id: string) => Promise<void>;
+
+  // Before & After CRUD
+  saveBeforeAfterItem: (item: BeforeAfterItem) => Promise<void>;
+  deleteBeforeAfterItem: (id: string) => Promise<void>;
   
   // Settings CRUD
   updateSettings: (settings: Setting) => Promise<void>;
@@ -78,6 +84,7 @@ export const DbProvider: React.FC<{ children: React.ReactNode }> = ({ children }
   const [materials, setMaterials] = useState<Material[]>([]);
   const [expenses, setExpenses] = useState<Expense[]>([]);
   const [payments, setPayments] = useState<Payment[]>([]);
+  const [beforeAfterItems, setBeforeAfterItems] = useState<BeforeAfterItem[]>([]);
   const [settings, setSettings] = useState<Setting | null>(null);
   const [dbLoading, setDbLoading] = useState(true);
 
@@ -100,6 +107,7 @@ export const DbProvider: React.FC<{ children: React.ReactNode }> = ({ children }
         mats,
         exps,
         pays,
+        bas,
         setts
       ] = await Promise.all([
         dbSvc.getProjects(),
@@ -110,6 +118,7 @@ export const DbProvider: React.FC<{ children: React.ReactNode }> = ({ children }
         dbSvc.getMaterials(),
         dbSvc.getExpenses(),
         dbSvc.getPayments(),
+        dbSvc.getBeforeAfterItems(),
         dbSvc.getSettings()
       ]);
 
@@ -121,6 +130,7 @@ export const DbProvider: React.FC<{ children: React.ReactNode }> = ({ children }
       setMaterials(mats);
       setExpenses(exps);
       setPayments(pays);
+      setBeforeAfterItems(bas);
       setSettings(setts);
     } catch (err) {
       console.error("Error fetching business data from DbService:", err);
@@ -302,6 +312,27 @@ export const DbProvider: React.FC<{ children: React.ReactNode }> = ({ children }
     setPayments(prev => prev.filter(x => x.id !== id));
   };
 
+  // Before & After CRUD
+  const saveBeforeAfterItem = async (item: BeforeAfterItem) => {
+    const dbSvc = getDbService();
+    const saved = await dbSvc.saveBeforeAfterItem(item);
+    setBeforeAfterItems(prev => {
+      const idx = prev.findIndex(x => x.id === item.id);
+      if (idx > -1) {
+        const copy = [...prev];
+        copy[idx] = saved;
+        return copy;
+      }
+      return [...prev, saved];
+    });
+  };
+
+  const deleteBeforeAfterItem = async (id: string) => {
+    const dbSvc = getDbService();
+    await dbSvc.deleteBeforeAfterItem(id);
+    setBeforeAfterItems(prev => prev.filter(x => x.id !== id));
+  };
+
   // Settings Update
   const updateSettings = async (setts: Setting) => {
     const dbSvc = getDbService();
@@ -331,6 +362,7 @@ export const DbProvider: React.FC<{ children: React.ReactNode }> = ({ children }
       materials,
       expenses,
       payments,
+      beforeAfterItems,
       settings,
       dbLoading,
       refreshData,
@@ -350,6 +382,8 @@ export const DbProvider: React.FC<{ children: React.ReactNode }> = ({ children }
       deleteExpense,
       savePayment,
       deletePayment,
+      saveBeforeAfterItem,
+      deleteBeforeAfterItem,
       updateSettings,
       exportDb,
       importDb
