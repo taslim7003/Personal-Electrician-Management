@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDb } from '../contexts/DbContext';
-import { DailyLog } from '../../database/types';
+import { DailyLog } from '../database/types';
 import { 
   Clock, 
   Plus, 

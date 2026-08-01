@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useEffect, useState, useCallback } from 'react';
 import { useAuth } from './AuthContext';
-import { DbService } from '../../database/dbService';
+import { DbService } from '../database/dbService';
 import { 
   Project, 
   Customer, 
@@ -12,7 +12,7 @@ import {
   Payment, 
   Setting,
   BeforeAfterItem
-} from '../../database/types';
+} from '../database/types';
 
 interface DbContextType {
   projects: Project[];

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDb } from '../contexts/DbContext';
-import { Payment } from '../../database/types';
+import { Payment } from '../database/types';
 import { 
   DollarSign, 
   Plus, 

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDb } from '../contexts/DbContext';
-import { Project, Customer } from '../../database/types';
+import { Project, Customer } from '../database/types';
 import { 
   Wrench, 
   Plus, 

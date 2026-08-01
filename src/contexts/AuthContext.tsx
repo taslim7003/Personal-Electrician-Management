@@ -7,7 +7,7 @@ import {
   GoogleAuthProvider,
   signInWithPopup
 } from 'firebase/auth';
-import { auth } from '../../database/firebase/config';
+import { auth } from '../database/firebase/config';
 
 interface AuthContextType {
   currentUser: User | null;

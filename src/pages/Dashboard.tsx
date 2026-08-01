@@ -6,7 +6,7 @@ import {
   Payment, 
   Attendance, 
   DailyLog 
-} from '../../database/types';
+} from '../database/types';
 import { 
   Wrench, 
   DollarSign, 

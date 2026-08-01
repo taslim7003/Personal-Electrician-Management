@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDb } from '../contexts/DbContext';
-import { BeforeAfterItem } from '../../database/types';
+import { BeforeAfterItem } from '../database/types';
 import { 
   Camera, 
   Plus, 

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDb } from '../contexts/DbContext';
-import { Employee, Attendance } from '../../database/types';
+import { Employee, Attendance } from '../database/types';
 import { 
   Users, 
   Plus, 
