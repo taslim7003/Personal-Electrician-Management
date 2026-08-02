@@ -213,15 +213,15 @@ export const Employees: React.FC = () => {
       {/* Header section */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h2 className="text-2xl font-bold tracking-tight">Labour & Rosters</h2>
-          <p className="text-sm text-slate-500 dark:text-slate-400">
+          <h2 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-white">Labour & Rosters</h2>
+          <p className="text-sm font-medium text-slate-600 dark:text-slate-400">
             Log daily electrician attendance, track field wages, advances, and project-allocated manpower costs.
           </p>
         </div>
         <div className="flex items-center gap-2 shrink-0">
           <button
             onClick={openAddEmployee}
-            className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-semibold bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl transition-all shadow-md shadow-indigo-600/15 cursor-pointer"
+            className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-bold bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl transition-all shadow-md shadow-indigo-600/15 cursor-pointer"
           >
             <UserPlus className="w-3.5 h-3.5" />
             Add Crew Member
@@ -231,48 +231,48 @@ export const Employees: React.FC = () => {
 
       {/* Wage cost boxes (aggregates) */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div className={`p-4 rounded-xl border ${isDark ? 'bg-slate-900 border-slate-800' : 'bg-slate-50 border-slate-150'} flex items-center justify-between`}>
+        <div className={`p-4 rounded-xl border ${isDark ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200/90 shadow-xs'} flex items-center justify-between`}>
           <div>
-            <span className="text-[10px] text-slate-400 block font-mono">WEEKLY WAGE overhead</span>
-            <span className="text-lg font-black">{currencySymbol}{thisWeekLaborCost.toLocaleString()}</span>
+            <span className="text-[10px] text-slate-600 dark:text-slate-400 block font-mono font-bold uppercase">WEEKLY WAGE OVERHEAD</span>
+            <span className="text-lg font-black text-slate-900 dark:text-white">{currencySymbol}{thisWeekLaborCost.toLocaleString()}</span>
           </div>
-          <div className="p-2.5 bg-blue-500/10 text-blue-500 rounded-xl">
+          <div className="p-2.5 bg-blue-500/10 text-blue-600 dark:text-blue-400 rounded-xl">
             <DollarSign className="w-4.5 h-4.5" />
           </div>
         </div>
 
-        <div className={`p-4 rounded-xl border ${isDark ? 'bg-slate-900 border-slate-800' : 'bg-slate-50 border-slate-150'} flex items-center justify-between`}>
+        <div className={`p-4 rounded-xl border ${isDark ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200/90 shadow-xs'} flex items-center justify-between`}>
           <div>
-            <span className="text-[10px] text-slate-400 block font-mono">MONTHLY WAGE OVERHEAD (JUL)</span>
-            <span className="text-lg font-black">{currencySymbol}{thisMonthLaborCost.toLocaleString()}</span>
+            <span className="text-[10px] text-slate-600 dark:text-slate-400 block font-mono font-bold uppercase">MONTHLY WAGE OVERHEAD</span>
+            <span className="text-lg font-black text-slate-900 dark:text-white">{currencySymbol}{thisMonthLaborCost.toLocaleString()}</span>
           </div>
-          <div className="p-2.5 bg-emerald-500/10 text-emerald-500 rounded-xl">
+          <div className="p-2.5 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 rounded-xl">
             <DollarSign className="w-4.5 h-4.5" />
           </div>
         </div>
 
-        <div className={`p-4 rounded-xl border ${isDark ? 'bg-slate-900 border-slate-800' : 'bg-slate-50 border-slate-150'} flex items-center justify-between`}>
+        <div className={`p-4 rounded-xl border ${isDark ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200/90 shadow-xs'} flex items-center justify-between`}>
           <div>
-            <span className="text-[10px] text-slate-400 block font-mono">ACTIVE FIELD CREW</span>
-            <span className="text-lg font-black">{employees.filter(e => e.status === 'active').length} Members</span>
+            <span className="text-[10px] text-slate-600 dark:text-slate-400 block font-mono font-bold uppercase">ACTIVE FIELD CREW</span>
+            <span className="text-lg font-black text-slate-900 dark:text-white">{employees.filter(e => e.status === 'active').length} Members</span>
           </div>
-          <div className="p-2.5 bg-amber-500/10 text-amber-500 rounded-xl">
+          <div className="p-2.5 bg-amber-500/10 text-amber-600 dark:text-amber-400 rounded-xl">
             <Users className="w-4.5 h-4.5" />
           </div>
         </div>
       </div>
 
       {/* Sub tabs selector */}
-      <div className="flex border-b border-slate-200 dark:border-slate-800">
+      <div className="flex border-b border-slate-300 dark:border-slate-800">
         <button
           onClick={() => setActiveSubTab('roster')}
-          className={`px-5 py-2.5 text-xs font-bold border-b-2 transition-colors cursor-pointer ${activeSubTab === 'roster' ? 'border-indigo-600 text-indigo-600 dark:border-indigo-400 dark:text-indigo-400 font-semibold' : 'border-transparent text-slate-400 hover:text-slate-200'}`}
+          className={`px-5 py-2.5 text-xs font-extrabold border-b-2 transition-colors cursor-pointer ${activeSubTab === 'roster' ? 'border-indigo-600 text-indigo-700 dark:border-indigo-400 dark:text-indigo-400' : 'border-transparent text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200'}`}
         >
           Daily Attendance Worksheet
         </button>
         <button
           onClick={() => setActiveSubTab('directory')}
-          className={`px-5 py-2.5 text-xs font-bold border-b-2 transition-colors cursor-pointer ${activeSubTab === 'directory' ? 'border-indigo-600 text-indigo-600 dark:border-indigo-400 dark:text-indigo-400 font-semibold' : 'border-transparent text-slate-400 hover:text-slate-200'}`}
+          className={`px-5 py-2.5 text-xs font-extrabold border-b-2 transition-colors cursor-pointer ${activeSubTab === 'directory' ? 'border-indigo-600 text-indigo-700 dark:border-indigo-400 dark:text-indigo-400' : 'border-transparent text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200'}`}
         >
           Employees Directory
         </button>

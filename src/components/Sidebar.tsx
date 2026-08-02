@@ -70,7 +70,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
         } ${
           isDark 
             ? 'bg-slate-900 border-slate-800 text-slate-100' 
-            : 'bg-white border-slate-200 text-slate-800'
+            : 'bg-white border-slate-200/90 text-slate-900 shadow-sm'
         }`}
       >
         {/* Brand Header */}
@@ -80,17 +80,17 @@ export const Sidebar: React.FC<SidebarProps> = ({
               <Zap className="w-6 h-6 fill-amber-500" />
             </div>
             <div>
-              <h1 className="font-bold text-base tracking-tight leading-tight">
+              <h1 className="font-bold text-base tracking-tight leading-tight text-slate-900 dark:text-white">
                 {settings?.companyName || 'Personal Electric'}
               </h1>
-              <p className="text-[11px] font-medium text-slate-400 dark:text-slate-500 uppercase tracking-wider">
+              <p className="text-[11px] font-bold text-slate-600 dark:text-slate-400 uppercase tracking-wider">
                 Electrical ERP
               </p>
             </div>
           </div>
           <button 
             onClick={() => setIsOpen(false)}
-            className="p-1.5 rounded-lg text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 lg:hidden"
+            className="p-1.5 rounded-lg text-slate-500 hover:text-slate-800 dark:text-slate-400 dark:hover:text-slate-200 lg:hidden"
             aria-label="Close sidebar"
           >
             <X className="w-5 h-5" />
@@ -106,15 +106,15 @@ export const Sidebar: React.FC<SidebarProps> = ({
               <button
                 key={item.id}
                 onClick={() => handleTabClick(item.id)}
-                className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl font-medium text-sm transition-all ${
+                className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl font-semibold text-sm transition-all ${
                   isActive
-                    ? 'bg-amber-500 text-slate-950 font-semibold shadow-xs'
+                    ? 'bg-amber-500 text-slate-950 font-bold shadow-xs'
                     : isDark
-                      ? 'text-slate-400 hover:bg-slate-800 hover:text-slate-100'
-                      : 'text-slate-600 hover:bg-slate-100 hover:text-slate-900'
+                      ? 'text-slate-300 hover:bg-slate-800 hover:text-slate-100'
+                      : 'text-slate-700 hover:bg-slate-100 hover:text-slate-950'
                 }`}
               >
-                <Icon className={`w-5 h-5 shrink-0 ${isActive ? 'text-slate-950' : 'text-slate-400'}`} />
+                <Icon className={`w-5 h-5 shrink-0 ${isActive ? 'text-slate-950' : isDark ? 'text-slate-400' : 'text-slate-500'}`} />
                 <span className="truncate">{item.label}</span>
               </button>
             );
@@ -123,21 +123,21 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
         {/* User / Footer area */}
         <div className="p-3 border-t border-inherit">
-          <div className={`p-3 rounded-xl flex items-center justify-between ${
-            isDark ? 'bg-slate-800/60' : 'bg-slate-50'
+          <div className={`p-3 rounded-xl flex items-center justify-between border ${
+            isDark ? 'bg-slate-800/60 border-slate-800 text-slate-100' : 'bg-slate-100/80 border-slate-200/80 text-slate-900'
           }`}>
             <div className="min-w-0 pr-2">
-              <p className="text-xs font-semibold truncate">
+              <p className="text-xs font-bold truncate text-slate-900 dark:text-slate-100">
                 {currentUser?.email || (isDemoMode ? 'Demo Mode User' : 'Electrician Pro')}
               </p>
-              <p className="text-[10px] font-medium text-amber-500 dark:text-amber-400">
+              <p className="text-[10px] font-bold text-amber-600 dark:text-amber-400">
                 {isDemoMode ? 'Demo Session' : 'Active Account'}
               </p>
             </div>
             <button
               onClick={() => logout()}
               title="Logout"
-              className="p-2 rounded-lg text-slate-400 hover:text-rose-500 hover:bg-rose-500/10 transition-colors shrink-0"
+              className="p-2 rounded-lg text-slate-500 hover:text-rose-600 hover:bg-rose-500/10 transition-colors shrink-0"
             >
               <LogOut className="w-4 h-4" />
             </button>

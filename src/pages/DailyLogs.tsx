@@ -150,26 +150,26 @@ export const DailyLogs: React.FC = () => {
       </div>
 
       {/* Filter and Search */}
-      <div className={`p-4 rounded-2xl border ${isDark ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-150'} flex flex-col md:flex-row gap-4 items-center justify-between`}>
+      <div className={`p-4 rounded-2xl border ${isDark ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200/90 shadow-xs'} flex flex-col md:flex-row gap-4 items-center justify-between`}>
         {/* Search */}
         <div className="relative w-full md:max-w-sm">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500 dark:text-slate-400" />
           <input
             type="text"
             placeholder="Search within work logs, descriptions..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-9 pr-4 py-2 text-xs bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 rounded-xl focus:outline-none focus:border-indigo-500"
+            className="w-full pl-9 pr-4 py-2 text-xs font-medium bg-white dark:bg-slate-950/60 border border-slate-300 dark:border-slate-800 rounded-xl text-slate-900 dark:text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500"
           />
         </div>
 
         {/* Project Selector */}
         <div className="flex items-center gap-2 w-full md:w-auto justify-start md:justify-end">
-          <span className="text-xs text-slate-400 font-semibold font-mono">PROJECT FILT:</span>
+          <span className="text-xs text-slate-700 dark:text-slate-300 font-bold font-mono">PROJECT:</span>
           <select
             value={filterProject}
             onChange={(e) => setFilterProject(e.target.value)}
-            className="px-3 py-2 text-xs bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 rounded-xl focus:outline-none"
+            className="px-3 py-2 text-xs font-medium bg-white dark:bg-slate-950/60 border border-slate-300 dark:border-slate-800 rounded-xl text-slate-900 dark:text-white focus:outline-none"
           >
             <option value="all">All Projects</option>
             {projects.map(p => (

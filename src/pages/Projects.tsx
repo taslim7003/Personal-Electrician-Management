@@ -204,22 +204,22 @@ export const Projects: React.FC = () => {
       {/* Header section */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h2 className="text-2xl font-bold tracking-tight">Project Directory</h2>
-          <p className="text-sm text-slate-500 dark:text-slate-400">
+          <h2 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-white">Project Directory</h2>
+          <p className="text-sm font-medium text-slate-600 dark:text-slate-400">
             Log active electrician contracts, track customer payments, and manage site locations.
           </p>
         </div>
         <div className="flex items-center gap-2">
           <button
             onClick={() => setIsCustomerFormOpen(true)}
-            className="inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-semibold bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-850 text-slate-800 dark:text-slate-200 rounded-xl transition-all border border-slate-200 dark:border-slate-800 shadow-sm cursor-pointer"
+            className="inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-bold bg-white dark:bg-slate-900 hover:bg-slate-50 dark:hover:bg-slate-850 text-slate-800 dark:text-slate-200 rounded-xl transition-all border border-slate-300 dark:border-slate-800 shadow-xs cursor-pointer"
           >
-            <Users className="w-3.5 h-3.5 text-indigo-500" />
+            <Users className="w-3.5 h-3.5 text-indigo-600 dark:text-indigo-400" />
             Add Customer
           </button>
           <button
             onClick={openAddModal}
-            className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-semibold bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl transition-all shadow-md shadow-indigo-600/15 cursor-pointer"
+            className="inline-flex items-center gap-1.5 px-4 py-2 text-xs font-bold bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl transition-all shadow-md shadow-indigo-600/15 cursor-pointer"
           >
             <Plus className="w-3.5 h-3.5" />
             Create Project
@@ -228,16 +228,16 @@ export const Projects: React.FC = () => {
       </div>
 
       {/* Search and Filters Bar */}
-      <div className={`p-4 rounded-2xl border ${isDark ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-150'} flex flex-col md:flex-row gap-4 items-center justify-between`}>
+      <div className={`p-4 rounded-2xl border ${isDark ? 'bg-slate-900 border-slate-800' : 'bg-white border-slate-200/90 shadow-xs'} flex flex-col md:flex-row gap-4 items-center justify-between`}>
         {/* Search */}
         <div className="relative w-full md:max-w-sm">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500 dark:text-slate-400" />
           <input
             type="text"
             placeholder="Search projects, customers, sites..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-9 pr-4 py-2 text-xs bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 rounded-xl focus:outline-none focus:border-indigo-500"
+            className="w-full pl-9 pr-4 py-2 text-xs font-medium bg-white dark:bg-slate-950/60 border border-slate-300 dark:border-slate-800 rounded-xl text-slate-900 dark:text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500"
           />
         </div>
 
@@ -247,7 +247,7 @@ export const Projects: React.FC = () => {
           <select
             value={filterStatus}
             onChange={(e) => setFilterStatus(e.target.value)}
-            className="px-3 py-2 text-xs bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 rounded-xl focus:outline-none"
+            className="px-3 py-2 text-xs font-medium bg-white dark:bg-slate-950/60 border border-slate-300 dark:border-slate-800 rounded-xl text-slate-900 dark:text-white focus:outline-none"
           >
             <option value="all">All Statuses</option>
             <option value="running">Running</option>
@@ -260,7 +260,7 @@ export const Projects: React.FC = () => {
           <select
             value={filterCategory}
             onChange={(e) => setFilterCategory(e.target.value)}
-            className="px-3 py-2 text-xs bg-slate-50 dark:bg-slate-950/60 border border-slate-200 dark:border-slate-800 rounded-xl focus:outline-none"
+            className="px-3 py-2 text-xs font-medium bg-white dark:bg-slate-950/60 border border-slate-300 dark:border-slate-800 rounded-xl text-slate-900 dark:text-white focus:outline-none"
           >
             <option value="all">All Categories</option>
             <option value="residential">Residential</option>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { AuthProvider, useAuth } from './contexts/AuthContext';
 import { DbProvider, useDb } from './contexts/DbContext';
@@ -29,6 +29,14 @@ const MainAppContent: React.FC = () => {
   const [currentTab, setCurrentTab] = useState<string>('dashboard');
 
   const isDark = settings?.theme === 'dark';
+
+  useEffect(() => {
+    if (isDark) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }, [isDark]);
 
   if (!currentUser && !isDemoMode) {
     return <Login />;
@@ -78,7 +86,7 @@ const MainAppContent: React.FC = () => {
   };
 
   return (
-    <div className={`min-h-screen flex ${isDark ? 'dark bg-slate-950 text-slate-100' : 'bg-slate-50 text-slate-800'} font-sans antialiased`}>
+    <div className={`min-h-screen flex ${isDark ? 'dark bg-slate-950 text-slate-100' : 'bg-slate-100/90 text-slate-900'} font-sans antialiased`}>
       
       {/* Sidebar navigation */}
       <Sidebar 
