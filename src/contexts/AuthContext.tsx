@@ -118,13 +118,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       }
 
       const provider = new GoogleAuthProvider();
-      const result = await signInWithPopup(auth, provider);
-      
-      // Verify authorized email
-      if (result.user.email !== AUTHORIZED_EMAIL) {
-        await signOut(auth);
-        throw new Error(`Unauthorized email. Access restricted to owner (${AUTHORIZED_EMAIL}).`);
-      }
+      await signInWithPopup(auth, provider);
     } catch (err: any) {
       console.error("Google sign in error:", err);
       let errMsg = err.message || 'Google Sign-In failed';
@@ -165,8 +159,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setCurrentUser(null);
   };
 
-  // Check if current logged-in user is the authorised administrator
-  const isAdmin = currentUser ? currentUser.email?.toLowerCase() === AUTHORIZED_EMAIL.toLowerCase() : false;
+  // Check if current logged-in user is authenticated
+  const isAdmin = currentUser ? true : false;
 
   return (
     <AuthContext.Provider value={{ 
